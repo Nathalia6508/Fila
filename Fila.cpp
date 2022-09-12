@@ -14,6 +14,7 @@ typedef struct
 void inicializar(FILA &f);
 void adicionar(FILA &f2, int item);
 bool filacheia(FILA &f);
+bool filavazia(FILA &f);
 int menu();
 void mostrarFila(FILA &f2);
 int remover(FILA &f2);
@@ -80,6 +81,11 @@ bool filacheia(FILA &f)
 	return(f.tamanho == DIMENSAO);
 }
 
+bool filavazia(FILA &f)
+{
+	return(f.tamanho == 0);
+}
+
 int menu()
 {
 	int opcao;
@@ -95,10 +101,18 @@ int menu()
 
 void mostrarFila(FILA &f2)
 {
-	int i;
-	for(i=0; i<f2.tamanho; i++)
+	if (filavazia(f2))
 	{
-		printf("%i\n", f2.item[i]);
+		printf ("Fila vazia\n");
+	}
+	
+	else
+	{
+		int i;
+		for(i=0; i<f2.tamanho; i++)
+		{
+			printf("%i\n", f2.item[i]);
+		}
 	}
 }
 
@@ -107,11 +121,19 @@ int remover(FILA &f2)
 	int item = f2.item[0];
 	int i;
 	
-	for(i=1; i<f2.tamanho; i++)
+	if (filavazia(f2))
 	{
-		f2.item[i-1] = f2.item[i];
+		printf ("Fila vazia\n");
 	}
 	
-	f2.tamanho--;
+	else
+	{
+		for(i=1; i<f2.tamanho; i++)
+		{
+			f2.item[i-1] = f2.item[i];
+		}
+		
+		f2.tamanho--;
+	}
 	return item;
 }
